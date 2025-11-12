@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Start server
+if [ -f server.jar ]; then
+    java -Xmx$MAX_RAM -Xms$MIN_RAM -jar server.jar nogui
+fi
+

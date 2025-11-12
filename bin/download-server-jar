@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Get the manifest URL for the desired version
+if [ "$MINECRAFT_VERSION" = "latest" ]; then
+    echo "Getting latest version's manifest url."
+    VERSION_URL=$(curl -s https://launchermeta.mojang.com/mc/game/version_manifest.json | \
+        jq -r '.latest.release as $latest_id | .versions[] | select(.id == $latest_id) | .url')
+
+else
+    echo "Getting the version $MINECRAFT_VERSION manifest URL."
+    VERSION_URL=$(curl -s https://launchermeta.mojang.com/mc/game/version_manifest.json | \
+        jq -r --arg vid "$MINECRAFT_VERSION" '.versions[] | select(.id == $vid) | .url')
+fi
+
+# Ensure the manifest URL was found
+if [ ! $VERSION_URL ]; then
+    echo "The manifest url for version $MINECRAFT_VERSION could not be found."
+    exit 1
+fi
+
+# Get the URL for the version's jar file
+echo "Getting the version $MINECRAFT_VERSION jar download URL"
+SERVER_URL=$(curl -s $VERSION_URL | jq -r '.downloads.server.url')
+
+# Ensure the jar download URL was found
+if [ ! $SERVER_URL ]; then 
+    echo "The manifest url for version $MINECRAFT_VERSION could not be found."
+    exit 1
+fi
+
+echo "Downloading the jar for version $MINECRAFT_VERSION."
+wget -q -O  server.jar $SERVER_URL
+
+# Ensure jar was downloaded
+if [ ! -f server.jar ]; then
+    echo "The jar file was not downloaded."
+    exit 1
+else
+    echo "Jar file successfully downloaded."
+    exit 0
+fi
+
