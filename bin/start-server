@@ -1,7 +1,13 @@
 #!/bin/bash
+set -e
+
+
+# Set default RAM config
+MAX_RAM=${MAX_RAM:-2G}
+MIN_RAM=${MIN_RAM:-2G}
 
 # Start server
 if [ -f server.jar ]; then
-    java -Xmx$MAX_RAM -Xms$MIN_RAM -jar server.jar nogui
+    java -Xmx"$MAX_RAM" -Xms"$MIN_RAM" -jar server.jar nogui
 fi
 
