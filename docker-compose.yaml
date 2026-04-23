@@ -6,7 +6,7 @@ services:
       - .env
     depends_on:
       - minecraft
-    network_mode: "service:minecraft" # Shares Minecraft's network stack
+    network_mode: "service:minecraft" # Shares Minecraft's network 
 
   minecraft:
     build:

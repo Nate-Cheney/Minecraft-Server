@@ -3,7 +3,7 @@ set -e
 
 
 # Set default RAM config
-MAX_RAM=${MAX_RAM:-2G}
+MAX_RAM=${MAX_RAM:-6G}
 MIN_RAM=${MIN_RAM:-2G}
 
 # Start server

@@ -1,0 +1,31 @@
+#!/bin/bash
+set -e
+
+
+GEYSER_FILE=plugins/geyser-spigot.jar
+GEYSER_URL=https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot
+FLOODGATE_FILE=plugins/floodgate-spigot.jar
+FLOODGATE_URL=https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot
+
+# Ensure plugins/geyser-spigot exists prior to download
+mkdir -p plugins/geyser-spigot
+
+# Download Geyser (spigot/paper)
+echo "Downloading geyser for spigot/paper..."
+wget -q -O $GEYSER_FILE "$GEYSER_URL"
+if [ ! -f "$GEYSER_FILE" ]; then
+    echo "Error, the geyser file did not download sucessfully."
+    exit 1
+fi
+
+# Download FLoodgate (spigot/paper)
+echo "Downloading floodgate for spigot/paper..."
+wget -q -O $FLOODGATE_FILE "$FLOODGATE_URL"
+if [ ! -f "$FLOODGATE_FILE" ]; then
+    echo "Error, the floodgate file did not download sucessfully."
+    exit 1
+fi
+
+echo "Downloaded both geyser and floodgate successfully."
+exit 0
+

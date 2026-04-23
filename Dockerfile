@@ -23,11 +23,10 @@ RUN chmod +x /usr/local/bin/*
 COPY ./server.properties .
 COPY ./eula.txt .
 
-# Download server jar file
-RUN download-fabric-jar
+# Download Paper server jar
+RUN download-paper
 
-# Start the server and immediately stop it so that
-# it exits cleanly after generating files.
+# Start the server once to generate config files, then stop cleanly
 RUN java -jar server.jar nogui > server.log 2>&1 & \
     PID=$!; \
     echo "Waiting for server to initialize..." && \
@@ -36,10 +35,8 @@ RUN java -jar server.jar nogui > server.log 2>&1 & \
     kill -SIGTERM $PID && \
     wait $PID || true
 
-# Download Floodgate and Geyser
-RUN mkdir -p /server/plugins/Geyser-Spigot/ && \
-    wget -O /server/plugins/floodgate.jar "https://modrinth.com/mod/floodgate" && \
-    wget -O /server/plugins/geyser-spigot.jar "https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/fabric"
+# Download geyser & floodgate
+RUN download-geyser
 
 # Copy Geyser config to container
 COPY ./config.yaml ./plugins/Geyser-Spigot/config.yml
