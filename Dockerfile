@@ -38,8 +38,8 @@ RUN java -jar server.jar nogui > server.log 2>&1 & \
 
 # Download Floodgate and Geyser
 RUN mkdir -p /server/plugins/Geyser-Spigot/ && \
-    wget -O /server/plugins/floodgate.jar "https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot" && \
-    wget -O /server/plugins/geyser-spigot.jar "https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot"
+    wget -O /server/plugins/floodgate.jar "https://modrinth.com/mod/floodgate" && \
+    wget -O /server/plugins/geyser-spigot.jar "https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/fabric"
 
 # Copy Geyser config to container
 COPY ./config.yaml ./plugins/Geyser-Spigot/config.yml
