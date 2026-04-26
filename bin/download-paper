@@ -3,7 +3,7 @@ set -e
 
 
 PAPER_FILE=server.jar
-PAPER_URL=https://fill-data.papermc.io/v1/objects/c140524a3c7c6367de1a68f71d579fc8e3f6186187d56077e719c5eed4ff9be1/paper-26.1.2-19.jar
+PAPER_URL=https://fill-data.papermc.io/v1/objects/25eb85bd8415195ce4bc188e1939e0c7cef77fb51d26d4e766407ee922561097/paper-1.21.11-130.jar
 
 echo "Downloading the Paper MC server jar..."
 wget -q -O $PAPER_FILE $PAPER_URL

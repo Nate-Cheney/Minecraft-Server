@@ -2,13 +2,12 @@
 set -e
 
 
-GEYSER_FILE=plugins/geyser-spigot.jar
+GEYSER_FILE=plugins/Geyser-Spigot.jar
 GEYSER_URL=https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot
-FLOODGATE_FILE=plugins/floodgate-spigot.jar
+FLOODGATE_FILE=plugins/Floodgate-Spigot.jar
 FLOODGATE_URL=https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot
 
-# Ensure plugins/geyser-spigot exists prior to download
-mkdir -p plugins/geyser-spigot
+mkdir -p plugins/Geyser-Spigot
 
 # Download Geyser (spigot/paper)
 echo "Downloading geyser for spigot/paper..."

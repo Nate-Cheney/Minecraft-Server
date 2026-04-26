@@ -1,20 +1,23 @@
 services:
   playit:
-    image: ghcr.io/playit-cloud/playit-agent:0.17
+    image: ghcr.io/playit-cloud/playit-agent:latest
     container_name: playit
+    restart: unless-stopped
+    network_mode: "service:minecraft"
     env_file:
       - .env
+    volumes:
+      - playit-data:/etc/playit
     depends_on:
       - minecraft
-    network_mode: "service:minecraft" # Shares Minecraft's network 
 
   minecraft:
     build:
       context: .
     container_name: minecraft-server
     ports:
-      - "25565:25565"
-      - "19132:19132/udp" 
+     - "25565:25565"
+     - "19132:19132/udp" 
     restart: unless-stopped
     volumes:
       - minecraft-data:/server
@@ -22,5 +25,6 @@ services:
       - .env
 
 volumes:
-  minecraft-data: {}
+  minecraft-data:
+  playit-data:
 
